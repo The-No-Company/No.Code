@@ -7,19 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2C07DA6D28A2827200FD98EB /* No_CodeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C07DA6C28A2827200FD98EB /* No_CodeApp.swift */; };
-		2C07DA6F28A2827200FD98EB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C07DA6E28A2827200FD98EB /* ContentView.swift */; };
+		2C07DA6D28A2827200FD98EB /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C07DA6C28A2827200FD98EB /* main.swift */; };
 		2C07DA7128A2827600FD98EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C07DA7028A2827600FD98EB /* Assets.xcassets */; };
 		2C07DA7428A2827600FD98EB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C07DA7328A2827600FD98EB /* Preview Assets.xcassets */; };
+		2C07DA7D28A2845C00FD98EB /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = 2C07DA7C28A2845C00FD98EB /* KeyboardShortcuts */; };
+		2C07DA8128A290D200FD98EB /* HotKey in Frameworks */ = {isa = PBXBuildFile; productRef = 2C07DA8028A290D200FD98EB /* HotKey */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2C07DA6928A2827200FD98EB /* No.Code.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = No.Code.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		2C07DA6C28A2827200FD98EB /* No_CodeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = No_CodeApp.swift; sourceTree = "<group>"; };
-		2C07DA6E28A2827200FD98EB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2C07DA6C28A2827200FD98EB /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		2C07DA7028A2827600FD98EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C07DA7328A2827600FD98EB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2C07DA7528A2827600FD98EB /* No_Code.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = No_Code.entitlements; sourceTree = "<group>"; };
+		2C07DA7E28A28E5700FD98EB /* No-Code-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "No-Code-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +28,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C07DA8128A290D200FD98EB /* HotKey in Frameworks */,
+				2C07DA7D28A2845C00FD98EB /* KeyboardShortcuts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,8 +55,8 @@
 		2C07DA6B28A2827200FD98EB /* No.Code */ = {
 			isa = PBXGroup;
 			children = (
-				2C07DA6C28A2827200FD98EB /* No_CodeApp.swift */,
-				2C07DA6E28A2827200FD98EB /* ContentView.swift */,
+				2C07DA7E28A28E5700FD98EB /* No-Code-Info.plist */,
+				2C07DA6C28A2827200FD98EB /* main.swift */,
 				2C07DA7028A2827600FD98EB /* Assets.xcassets */,
 				2C07DA7528A2827600FD98EB /* No_Code.entitlements */,
 				2C07DA7228A2827600FD98EB /* Preview Content */,
@@ -85,6 +88,10 @@
 			dependencies = (
 			);
 			name = No.Code;
+			packageProductDependencies = (
+				2C07DA7C28A2845C00FD98EB /* KeyboardShortcuts */,
+				2C07DA8028A290D200FD98EB /* HotKey */,
+			);
 			productName = No.Code;
 			productReference = 2C07DA6928A2827200FD98EB /* No.Code.app */;
 			productType = "com.apple.product-type.application";
@@ -113,6 +120,10 @@
 				Base,
 			);
 			mainGroup = 2C07DA6028A2827200FD98EB;
+			packageReferences = (
+				2C07DA7B28A2845C00FD98EB /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
+				2C07DA7F28A290D200FD98EB /* XCRemoteSwiftPackageReference "HotKey" */,
+			);
 			productRefGroup = 2C07DA6A28A2827200FD98EB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -139,8 +150,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C07DA6F28A2827200FD98EB /* ContentView.swift in Sources */,
-				2C07DA6D28A2827200FD98EB /* No_CodeApp.swift in Sources */,
+				2C07DA6D28A2827200FD98EB /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +284,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "No-Code-Info.plist";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -301,6 +312,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "No-Code-Info.plist";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -336,6 +348,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2C07DA7B28A2845C00FD98EB /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/KeyboardShortcuts";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		2C07DA7F28A290D200FD98EB /* XCRemoteSwiftPackageReference "HotKey" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/soffes/HotKey";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2C07DA7C28A2845C00FD98EB /* KeyboardShortcuts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2C07DA7B28A2845C00FD98EB /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */;
+			productName = KeyboardShortcuts;
+		};
+		2C07DA8028A290D200FD98EB /* HotKey */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2C07DA7F28A290D200FD98EB /* XCRemoteSwiftPackageReference "HotKey" */;
+			productName = HotKey;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2C07DA6128A2827200FD98EB /* Project object */;
 }
