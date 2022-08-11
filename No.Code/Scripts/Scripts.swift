@@ -75,4 +75,12 @@ struct Scripts {
         return defaultError
     }
     
+    static func replace(_ input: String, of: String, with: String) -> String {
+        if !input.isEmpty {
+            let replaced = input.replacingOccurrences(of: of, with: with)
+            return replaced
+        }
+        return defaultError
+    }
+    
 }

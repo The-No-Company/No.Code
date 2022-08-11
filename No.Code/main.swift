@@ -20,7 +20,7 @@ class AppDelegate: NSResponder, NSApplicationDelegate, ObservableObject {
     
     var statusItem: NSStatusItem!
     var window: NSWindow?
-    let hotKey = HotKey(key: .one, modifiers: [.command, .shift])
+    let hotKeyRun = HotKey(key: .one, modifiers: [.command, .shift])
     let hotKeySelection = HotKey(key: .two, modifiers: [.command, .shift])
     let hotKeyLine = HotKey(key: .l, modifiers: [.command, .shift])
 
@@ -31,11 +31,11 @@ class AppDelegate: NSResponder, NSApplicationDelegate, ObservableObject {
         NSApplication.shared.activate(ignoringOtherApps: true)
         
         
-        hotKey.keyDownHandler = { [self] in
+        hotKeyRun.keyDownHandler = { [self] in
             startProcess()
         }
         
-        hotKeySelection.keyDownHandler = {
+        hotKeySelection.keyDownHandler = { [self] in
             copyShortCut()
         }
         
@@ -68,50 +68,10 @@ class AppDelegate: NSResponder, NSApplicationDelegate, ObservableObject {
 }
 
 func textProcess(){
-    let pasteboard = NSPasteboard.general
-    var copiedString = pasteboard.string(forType: .string) ?? ""
-    print("*** \(copiedString) ***")
-    
-    if (copiedString.contains("/e64")){
-        copiedString = copiedString.replacingOccurrences(of: "/e64", with: "")
-        copiedString = Scripts.toBase64(copiedString)
+    Engine.shared.process()
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        pasteShortCut()
     }
-    
-    if (copiedString.contains("/d64")){
-        copiedString = copiedString.replacingOccurrences(of: "/d64", with: "")
-        copiedString = Scripts.fromBase64(copiedString)
-    }
-    
-    if copiedString.contains("/toUTC") {
-        copiedString = copiedString.replacingOccurrences(of: " ", with: "")
-        copiedString = copiedString.replacingOccurrences(of: "/toUTC", with: "")
-        copiedString = Scripts.toUTC(copiedString)
-    }
-    
-    if copiedString.contains("/countWords") {
-        copiedString = copiedString.replacingOccurrences(of: "/countWords", with: "")
-        copiedString = copiedString + Scripts.countWord(copiedString)
-    }
-    
-    if copiedString.contains("/countLines") {
-        copiedString = copiedString.replacingOccurrences(of: "/countLines", with: "")
-        copiedString = copiedString + Scripts.countLines(copiedString)
-    }
-    
-    if copiedString.contains("/countChar") {
-        copiedString = copiedString.replacingOccurrences(of: "/countChar", with: "")
-        copiedString = copiedString + Scripts.countCharacter(copiedString)
-    }
-    
-    if copiedString.contains("/jwt") {
-        copiedString = copiedString.replacingOccurrences(of: "/jwt", with: "")
-        copiedString = Scripts.jwtDetails(copiedString)
-    }
-    
-    NSPasteboard.general.clearContents()
-    NSPasteboard.general.setString(copiedString, forType: .string)
-    
-    pasteShortCut()
 }
 
 func selectShortcut() {
@@ -134,7 +94,6 @@ func selectShortcut() {
     
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
         copyShortCut()
-        print("copyShortCut done")
     }
 
 }
