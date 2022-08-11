@@ -83,4 +83,12 @@ struct Scripts {
         return defaultError
     }
     
+    static func removeLines(_ input: String) -> String {
+        if !input.isEmpty {
+            let noLine = input.replacingOccurrences(of: "\n", with: " ")
+            return noLine
+        }
+        return defaultError
+    }
+    
 }

@@ -63,6 +63,11 @@ public class Engine: NSObject {
             copiedString = Scripts.replace(cleanText!, of: rules_of!, with: rules_with!)
         }
         
+        if copiedString.contains("/removeLines") {
+            copiedString = copiedString.replacingOccurrences(of: "/removeLines", with: "")
+            copiedString = Scripts.removeLines(copiedString)
+        }
+        
         
         NSPasteboard.general.clearContents()
         NSPasteboard.general.setString(copiedString, forType: .string)

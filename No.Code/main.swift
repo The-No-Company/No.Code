@@ -49,14 +49,20 @@ class AppDelegate: NSResponder, NSApplicationDelegate, ObservableObject {
     
     func setupMenus() {
         let menu = NSMenu()
-        let one = NSMenuItem(title: "Run from selection", action: #selector(didTapRun) , keyEquivalent: "d")
+        let one = NSMenuItem(title: "Run", action: #selector(didTapRun) , keyEquivalent: "d")
+        let two = NSMenuItem(title: "Run from selection", action: #selector(didTapRunSelection) , keyEquivalent: "d")
         menu.addItem(one)
+        menu.addItem(two)
         menu.addItem(NSMenuItem.separator())
         menu.addItem(NSMenuItem(title: "Quit", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
         statusItem.menu = menu
     }
-    
+  
     @objc func didTapRun() {
+        startProcess()
+    }
+    
+    @objc func didTapRunSelection() {
         copyShortCut()
     }
     
