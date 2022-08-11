@@ -7,20 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		236BC19428A5004500DE6EDA /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236BC19328A5004500DE6EDA /* StringExtensions.swift */; };
+		236BC19728A5005200DE6EDA /* Scripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236BC19628A5005200DE6EDA /* Scripts.swift */; };
 		2C07DA6D28A2827200FD98EB /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C07DA6C28A2827200FD98EB /* main.swift */; };
 		2C07DA7128A2827600FD98EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C07DA7028A2827600FD98EB /* Assets.xcassets */; };
 		2C07DA7428A2827600FD98EB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C07DA7328A2827600FD98EB /* Preview Assets.xcassets */; };
 		2C07DA7D28A2845C00FD98EB /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = 2C07DA7C28A2845C00FD98EB /* KeyboardShortcuts */; };
 		2C07DA8128A290D200FD98EB /* HotKey in Frameworks */ = {isa = PBXBuildFile; productRef = 2C07DA8028A290D200FD98EB /* HotKey */; };
+		2C07DA8328A5775C00FD98EB /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C07DA8228A5775C00FD98EB /* Engine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		236BC19328A5004500DE6EDA /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		236BC19628A5005200DE6EDA /* Scripts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scripts.swift; sourceTree = "<group>"; };
 		2C07DA6928A2827200FD98EB /* No.Code.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = No.Code.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C07DA6C28A2827200FD98EB /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		2C07DA7028A2827600FD98EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C07DA7328A2827600FD98EB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2C07DA7528A2827600FD98EB /* No_Code.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = No_Code.entitlements; sourceTree = "<group>"; };
 		2C07DA7E28A28E5700FD98EB /* No-Code-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "No-Code-Info.plist"; sourceTree = SOURCE_ROOT; };
+		2C07DA8228A5775C00FD98EB /* Engine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +42,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		236BC19228A5004500DE6EDA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				236BC19328A5004500DE6EDA /* StringExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		236BC19528A5005200DE6EDA /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				236BC19628A5005200DE6EDA /* Scripts.swift */,
+			);
+			path = Scripts;
+			sourceTree = "<group>";
+		};
 		2C07DA6028A2827200FD98EB = {
 			isa = PBXGroup;
 			children = (
@@ -57,6 +79,9 @@
 			children = (
 				2C07DA7E28A28E5700FD98EB /* No-Code-Info.plist */,
 				2C07DA6C28A2827200FD98EB /* main.swift */,
+				2C07DA8228A5775C00FD98EB /* Engine.swift */,
+				236BC19528A5005200DE6EDA /* Scripts */,
+				236BC19228A5004500DE6EDA /* Extensions */,
 				2C07DA7028A2827600FD98EB /* Assets.xcassets */,
 				2C07DA7528A2827600FD98EB /* No_Code.entitlements */,
 				2C07DA7228A2827600FD98EB /* Preview Content */,
@@ -150,6 +175,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				236BC19728A5005200DE6EDA /* Scripts.swift in Sources */,
+				2C07DA8328A5775C00FD98EB /* Engine.swift in Sources */,
+				236BC19428A5004500DE6EDA /* StringExtensions.swift in Sources */,
 				2C07DA6D28A2827200FD98EB /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

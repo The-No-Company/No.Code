@@ -20,7 +20,7 @@ class AppDelegate: NSResponder, NSApplicationDelegate, ObservableObject {
     
     var statusItem: NSStatusItem!
     var window: NSWindow?
-    let hotKey = HotKey(key: .one, modifiers: [.command, .shift])
+    let hotKeyRun = HotKey(key: .one, modifiers: [.command, .shift])
     let hotKeySelection = HotKey(key: .two, modifiers: [.command, .shift])
     let hotKeyLine = HotKey(key: .l, modifiers: [.command, .shift])
 
@@ -31,7 +31,7 @@ class AppDelegate: NSResponder, NSApplicationDelegate, ObservableObject {
         NSApplication.shared.activate(ignoringOtherApps: true)
         
         
-        hotKey.keyDownHandler = { [self] in
+        hotKeyRun.keyDownHandler = { [self] in
             startProcess()
         }
         
@@ -48,27 +48,22 @@ class AppDelegate: NSResponder, NSApplicationDelegate, ObservableObject {
     }
     
     func setupMenus() {
-        // 1
         let menu = NSMenu()
-        // 2
         let one = NSMenuItem(title: "Run", action: #selector(didTapRun) , keyEquivalent: "d")
-        
+        let two = NSMenuItem(title: "Run from selection", action: #selector(didTapRunSelection) , keyEquivalent: "d")
         menu.addItem(one)
-        
+        menu.addItem(two)
         menu.addItem(NSMenuItem.separator())
-        
         menu.addItem(NSMenuItem(title: "Quit", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
-        
-        // 3
         statusItem.menu = menu
     }
-    
-    private func changeStatusBarButton(number: Int) {
-        
+  
+    @objc func didTapRun() {
+        startProcess()
     }
     
-    @objc func didTapRun() {
-        changeStatusBarButton(number: 1)
+    @objc func didTapRunSelection() {
+        copyShortCut()
     }
     
     func startProcess(){
@@ -79,27 +74,10 @@ class AppDelegate: NSResponder, NSApplicationDelegate, ObservableObject {
 }
 
 func textProcess(){
-    let pasteboard = NSPasteboard.general
-    var copiedString = pasteboard.string(forType: .string) ?? ""
-    
-    if (copiedString.contains("/e64")){
-        copiedString = copiedString.replacingOccurrences(of: "/e64", with: "")
-        copiedString = copiedString.toBase64()
+    Engine.shared.process()
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        pasteShortCut()
     }
-    
-    if (copiedString.contains("/d64")){
-        copiedString = copiedString.replacingOccurrences(of: " ", with: "")
-        copiedString = copiedString.replacingOccurrences(of: "/d64", with: "")
-        copiedString = copiedString.fromBase64() ?? copiedString
-    }
-    
-    
-    NSPasteboard.general.clearContents()
-    NSPasteboard.general.setString(copiedString, forType: .string)
-    
-    pasteShortCut()
-   
-    
 }
 
 func selectShortcut() {
@@ -122,7 +100,6 @@ func selectShortcut() {
     
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
         copyShortCut()
-        print("copyShortCut done")
     }
 
 }
@@ -146,7 +123,6 @@ func copyShortCut(){
     
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
         textProcess()
-        print("textProcess done")
     }
 }
 
@@ -167,21 +143,4 @@ func pasteShortCut(){
     spcd?.post(tap: loc)
     spcu?.post(tap: loc)
     cmdu?.post(tap: loc)
-}
-
-
-extension String {
-
-    func fromBase64() -> String? {
-        guard let data = Data(base64Encoded: self) else {
-            return nil
-        }
-
-        return String(data: data, encoding: .utf8)
-    }
-
-    func toBase64() -> String {
-        return Data(self.utf8).base64EncodedString()
-    }
-
 }
