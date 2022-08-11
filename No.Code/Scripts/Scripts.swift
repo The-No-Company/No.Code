@@ -91,4 +91,17 @@ struct Scripts {
         return defaultError
     }
     
+    static func breakWords(_ input: String) -> String {
+        if !input.isEmpty {
+            let allWords : [String] = input.components(separatedBy: " ")
+            var result = ""
+            allWords.forEach { word in
+                result += word
+                result += "\n"
+            }
+            return result
+        }
+        return defaultError
+    }
+    
 }

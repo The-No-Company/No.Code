@@ -68,6 +68,12 @@ public class Engine: NSObject {
             copiedString = Scripts.removeLines(copiedString)
         }
         
+        if copiedString.contains("/breakWords") {
+            copiedString = copiedString.replacingOccurrences(of: "/breakWords", with: "")
+            copiedString = Scripts.breakWords(copiedString)
+        }
+        
+        
         
         NSPasteboard.general.clearContents()
         NSPasteboard.general.setString(copiedString, forType: .string)
