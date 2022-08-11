@@ -49,19 +49,15 @@ class AppDelegate: NSResponder, NSApplicationDelegate, ObservableObject {
     
     func setupMenus() {
         let menu = NSMenu()
-        let one = NSMenuItem(title: "Run", action: #selector(didTapRun) , keyEquivalent: "d")
+        let one = NSMenuItem(title: "Run from selection", action: #selector(didTapRun) , keyEquivalent: "d")
         menu.addItem(one)
         menu.addItem(NSMenuItem.separator())
         menu.addItem(NSMenuItem(title: "Quit", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
         statusItem.menu = menu
     }
     
-    private func changeStatusBarButton(number: Int) {
-        
-    }
-    
     @objc func didTapRun() {
-        changeStatusBarButton(number: 1)
+        copyShortCut()
     }
     
     func startProcess(){
@@ -74,7 +70,7 @@ class AppDelegate: NSResponder, NSApplicationDelegate, ObservableObject {
 func textProcess(){
     let pasteboard = NSPasteboard.general
     var copiedString = pasteboard.string(forType: .string) ?? ""
-    print("*** \(copiedString)")
+    print("*** \(copiedString) ***")
     
     if (copiedString.contains("/e64")){
         copiedString = copiedString.replacingOccurrences(of: "/e64", with: "")
@@ -162,7 +158,6 @@ func copyShortCut(){
     
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
         textProcess()
-        print("textProcess done")
     }
 }
 
