@@ -35,7 +35,7 @@ class AppDelegate: NSResponder, NSApplicationDelegate, ObservableObject {
             startProcess()
         }
         
-        hotKeySelection.keyDownHandler = { [self] in
+        hotKeySelection.keyDownHandler = {
             copyShortCut()
         }
         
@@ -48,18 +48,11 @@ class AppDelegate: NSResponder, NSApplicationDelegate, ObservableObject {
     }
     
     func setupMenus() {
-        // 1
         let menu = NSMenu()
-        // 2
         let one = NSMenuItem(title: "Run", action: #selector(didTapRun) , keyEquivalent: "d")
-        
         menu.addItem(one)
-        
         menu.addItem(NSMenuItem.separator())
-        
         menu.addItem(NSMenuItem(title: "Quit", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
-        
-        // 3
         statusItem.menu = menu
     }
     
@@ -81,25 +74,43 @@ class AppDelegate: NSResponder, NSApplicationDelegate, ObservableObject {
 func textProcess(){
     let pasteboard = NSPasteboard.general
     var copiedString = pasteboard.string(forType: .string) ?? ""
+    print("*** \(copiedString)")
     
     if (copiedString.contains("/e64")){
         copiedString = copiedString.replacingOccurrences(of: "/e64", with: "")
-        copiedString = copiedString.toBase64()
+        copiedString = Scripts.toBase64(copiedString)
     }
     
     if (copiedString.contains("/d64")){
-        copiedString = copiedString.replacingOccurrences(of: " ", with: "")
         copiedString = copiedString.replacingOccurrences(of: "/d64", with: "")
-        copiedString = copiedString.fromBase64() ?? copiedString
+        copiedString = Scripts.fromBase64(copiedString)
     }
     
+    if copiedString.contains("/toUTC") {
+        copiedString = copiedString.replacingOccurrences(of: " ", with: "")
+        copiedString = copiedString.replacingOccurrences(of: "/toUTC", with: "")
+        copiedString = Scripts.toUTC(copiedString)
+    }
+    
+    if copiedString.contains("/countWords") {
+        copiedString = copiedString.replacingOccurrences(of: "/countWords", with: "")
+        copiedString = copiedString + Scripts.countWord(copiedString)
+    }
+    
+    if copiedString.contains("/countLines") {
+        copiedString = copiedString.replacingOccurrences(of: "/countLines", with: "")
+        copiedString = copiedString + Scripts.countLines(copiedString)
+    }
+    
+    if copiedString.contains("/countChar") {
+        copiedString = copiedString.replacingOccurrences(of: "/countChar", with: "")
+        copiedString = copiedString + Scripts.countCharacter(copiedString)
+    }
     
     NSPasteboard.general.clearContents()
     NSPasteboard.general.setString(copiedString, forType: .string)
     
     pasteShortCut()
-   
-    
 }
 
 func selectShortcut() {
@@ -167,21 +178,4 @@ func pasteShortCut(){
     spcd?.post(tap: loc)
     spcu?.post(tap: loc)
     cmdu?.post(tap: loc)
-}
-
-
-extension String {
-
-    func fromBase64() -> String? {
-        guard let data = Data(base64Encoded: self) else {
-            return nil
-        }
-
-        return String(data: data, encoding: .utf8)
-    }
-
-    func toBase64() -> String {
-        return Data(self.utf8).base64EncodedString()
-    }
-
 }
