@@ -25,4 +25,23 @@ extension String {
     func numberOfOccurrencesOf(string: String) -> Int {
         return self.components(separatedBy:string).count - 1
     }
+    
+    func slice(from: String, to: String) -> String? {
+        return (range(of: from)?.upperBound).flatMap { substringFrom in
+            (range(of: to, range: substringFrom..<endIndex)?.lowerBound).map { substringTo in
+                String(self[substringFrom..<substringTo])
+            }
+        }
+    }
+    
+    func base64Decoded() -> String? {
+        var st = self
+        st = st.replacingOccurrences(of: "_", with: "/")
+        st = st.replacingOccurrences(of: "-", with: "+")
+        if self.count % 4 <= 3 {
+            st += String(repeating: "=", count: 4 - (self.count % 4))
+        }
+        guard let data = Data(base64Encoded: st) else { return nil }
+        return String(data: data, encoding: .utf8)
+    }
 }

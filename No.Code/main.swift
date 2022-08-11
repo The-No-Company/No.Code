@@ -107,6 +107,11 @@ func textProcess(){
         copiedString = copiedString + Scripts.countCharacter(copiedString)
     }
     
+    if copiedString.contains("/jwt") {
+        copiedString = copiedString.replacingOccurrences(of: "/jwt", with: "")
+        copiedString = Scripts.jwtDetails(copiedString)
+    }
+    
     NSPasteboard.general.clearContents()
     NSPasteboard.general.setString(copiedString, forType: .string)
     

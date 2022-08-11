@@ -63,4 +63,16 @@ struct Scripts {
         return defaultError
     }
     
+    static func jwtDetails(_ input: String) -> String {
+        if !input.isEmpty {
+            let noSpace = input.replacingOccurrences(of: " ", with: "")
+            if let data = noSpace.slice(from: ".", to: ".") {
+                if let decodedData = data.base64Decoded() {
+                    return decodedData
+                }
+            }
+        }
+        return defaultError
+    }
+    
 }
